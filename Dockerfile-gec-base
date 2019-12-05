@@ -1,0 +1,12 @@
+FROM python:3.6-alpine
+LABEL maintainer.1="Sam Havens <sam.havens@qordoba.com>"
+LABEL maintainer.2="Melisa Stahl <melisa@qordoba.com>"
+
+RUN apk add --no-cache --virtual build-deps g++ git musl-dev make && \
+    python -m pip install -U pip && \
+    python -m pip install -U spacy==2.1.0 && \    
+    python -m spacy download en_core_web_sm && \
+    python -m pip install -U nltk==3.4.5 && \
+    python -m nltk.downloader all
+
+ENV PYTHONIOENCODING=utf-8
